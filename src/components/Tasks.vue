@@ -1,6 +1,10 @@
 <template v-if="tasks">
     <ul>
-        <jf-task v-for="task in tasks" :key="task.idReadable" :task="task"/>
+        <jf-task v-for="task in tasks"
+                 :id="task.id ? task.id : ''"
+                 :key="task.idReadable"
+                 :task="task"
+        />
     </ul>
 </template>
 
@@ -14,7 +18,7 @@ export default {
     components: {JfTask},
     data() {
         return {
-            url: '/issues?query=%23Unresolved%20%23я&fields=summary,idReadable,customFields(name,value(name))&customFields=Оценка&customFields=State&customFields=priority',
+            url: '/issues?query=%23Unresolved%20%23я&fields=id,summary,idReadable,project(shortName),customFields(name,value(name))&customFields=State&customFields=priority',
         }
     },
     computed: {
@@ -28,9 +32,9 @@ export default {
         this.getTask()
     },
     methods: {
-      getTask() {
-          this.$store.dispatch(actionTypes.getTasks, {url: this.url})
-      },
-  }
+        getTask() {
+            this.$store.dispatch(actionTypes.getTasks, {url: this.url})
+        },
+    }
 }
 </script>

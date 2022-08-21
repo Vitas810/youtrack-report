@@ -50,8 +50,17 @@ const actions = {
                     }
                     tasks && tasks.forEach(task => {
                             task.customFields.forEach(customFields => {
+                                if (customFields.name && customFields.name === 'Priority') {
+                                    if (!customFields.value) return
+                                    if (customFields.value.name !== 'Normal') {
+                                        listTasks.priority.push(task)
+                                    }
+                                }
+
                                 if (customFields.name && customFields.name === 'State') {
                                     if (!customFields.value) return
+                                    if (listTasks.priority.includes(task)) return
+
                                     switch (customFields.value.name) {
                                         case 'На оценке':
                                             listTasks.onGradeTask.push(task)
@@ -80,14 +89,6 @@ const actions = {
                                     }
                                 }
                             })
-                        task.customFields.forEach(customFields => {
-                            if (customFields.name && customFields.name === 'Priority') {
-                                if (!customFields.value) return
-                                if (customFields.value.name !== 'Normal') {
-                                    listTasks.priority.push(task)
-                                }
-                            }
-                        })
                     })
                     context.commit(mutationTypes.getTasksSuccess, listTasks)
                     resolve(listTasks)

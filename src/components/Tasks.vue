@@ -14,6 +14,10 @@
                      :key="task.id"
                      :task="task"
             />
+            <jf-task v-for="task in tasks.gradeTask"
+                     :key="task.id"
+                     :task="task"
+            />
 
             <jf-task v-for="task in tasks.performance"
                      :key="task.id"

@@ -46,6 +46,7 @@ const actions = {
                         verified: [],
                         release: [],
                         masterTest: [],
+                        priority: [],
                     }
                     tasks && tasks.forEach(task => {
                             task.customFields.forEach(customFields => {
@@ -79,6 +80,14 @@ const actions = {
                                     }
                                 }
                             })
+                        task.customFields.forEach(customFields => {
+                            if (customFields.name && customFields.name === 'Priority') {
+                                if (!customFields.value) return
+                                if (customFields.value.name !== 'Normal') {
+                                    listTasks.priority.push(task)
+                                }
+                            }
+                        })
                     })
                     context.commit(mutationTypes.getTasksSuccess, listTasks)
                     resolve(listTasks)

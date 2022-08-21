@@ -1,45 +1,51 @@
 <template>
-    <ul v-if="tasks">
-        <jf-task v-for="task in tasks.gradeTask"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.onGradeTask"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.performance"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.inWork"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.test"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.verified"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.release"
-                 :key="task.id"
-                 :task="task"
-        />
-        <hr>
-        <jf-task v-for="task in tasks.masterTest"
-                 :key="task.id"
-                 :task="task"
-        />
-    </ul>
+    <div class="tasks">
+        <h4>Приоритетные задачи: </h4>
+        <ul v-if="tasks">
+            <jf-task v-for="task in tasks.priority"
+                     :key="task.id"
+                     :task="task"
+            />
+        </ul>
+
+        <h4>Планы на август 2022: </h4>
+        <ul v-if="tasks">
+            <jf-task v-for="task in tasks.onGradeTask"
+                     :key="task.id"
+                     :task="task"
+            />
+
+            <jf-task v-for="task in tasks.performance"
+                     :key="task.id"
+                     :task="task"
+            />
+
+            <jf-task v-for="task in tasks.inWork"
+                     :key="task.id"
+                     :task="task"
+            />
+
+            <jf-task v-for="task in tasks.test"
+                     :key="task.id"
+                     :task="task"
+            />
+
+            <jf-task v-for="task in tasks.verified"
+                     :key="task.id"
+                     :task="task"
+            />
+
+            <jf-task v-for="task in tasks.release"
+                     :key="task.id"
+                     :task="task"
+            />
+
+            <jf-task v-for="task in tasks.masterTest"
+                     :key="task.id"
+                     :task="task"
+            />
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -72,3 +78,17 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .tasks {
+        max-width: 1000px;
+        margin: auto;
+    }
+    h4 {
+        margin: 5px 0;
+    }
+    ul {
+        padding-left: 0;
+        margin: 0;
+    }
+</style>

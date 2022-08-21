@@ -1,7 +1,6 @@
-<template v-if="tasks">
-    <ul>
+<template>
+    <ul v-if="tasks">
         <jf-task v-for="task in tasks"
-                 :id="task.id ? task.id : ''"
                  :key="task.idReadable"
                  :task="task"
         />

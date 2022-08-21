@@ -17,10 +17,6 @@ export default {
             type: Object,
             required: true
         },
-        id: {
-            type: String,
-            required: true
-        }
     },
     data() {
         return {
@@ -57,26 +53,32 @@ export default {
         getCustomFields() {
             let typePresentation = ''
             switch (this.task.project.shortName) {
-                case 'JILFOND':
-                    typePresentation = '130-46'
-                    break
                 case 'LK':
                     typePresentation = '130-43'
                     break
                 case 'API':
                     typePresentation = '130-45'
                     break
+                case 'JILFOND':
+                    typePresentation = '130-46'
+                    break
+                case 'JILFOND3':
+                    typePresentation = '130-47'
+                    break
+                case 'MY_JILFOND':
+                    typePresentation = '130-48'
+                    break
                 default:
                     typePresentation = '130-43'
             }
 
             try {
-                axios.get(`issues/${this.id}/fields/${typePresentation}${this.url}`)
+                axios.get(`issues/${this.task.id}/fields/${typePresentation}${this.url}`)
                     .then(response => {
                         this.listPresentation = response.data
                     })
             } catch (e) {
-                console.log(1, e)
+                console.log(e)
             }
         },
     }

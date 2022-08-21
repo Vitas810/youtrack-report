@@ -8,7 +8,7 @@
             />
         </ul>
 
-        <h4>Планы на август 2022: </h4>
+        <h4>Планы на {{ month }} 2022: </h4>
         <ul v-if="tasks">
             <jf-task v-for="task in tasks.onGradeTask"
                      :key="task.id"
@@ -66,7 +66,13 @@ export default {
             isLoading: (state) => state.tasks.isLoading,
             tasks: (state) => state.tasks.data,
             error: (state) => state.tasks.error,
-        })
+        }),
+        month() {
+            const options = { month: 'long' };
+            const date  = new Date();
+            const month = new Date( date.getFullYear(), date.getMonth()+1, 1 );
+            return month.toLocaleDateString("ru", options)
+        }
     },
     mounted() {
         this.getTask()

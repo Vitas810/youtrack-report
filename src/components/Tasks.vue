@@ -1,9 +1,43 @@
 <template>
     <ul v-if="tasks">
-        <jf-task v-for="task in tasks"
-                 :key="task.idReadable"
+        <jf-task v-for="task in tasks.gradeTask"
+                 :key="task.id"
                  :task="task"
-                 @prepared_task="preparedTask"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.onGradeTask"
+                 :key="task.id"
+                 :task="task"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.performance"
+                 :key="task.id"
+                 :task="task"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.inWork"
+                 :key="task.id"
+                 :task="task"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.test"
+                 :key="task.id"
+                 :task="task"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.verified"
+                 :key="task.id"
+                 :task="task"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.release"
+                 :key="task.id"
+                 :task="task"
+        />
+        <hr>
+        <jf-task v-for="task in tasks.masterTest"
+                 :key="task.id"
+                 :task="task"
         />
     </ul>
 </template>
@@ -19,7 +53,6 @@ export default {
     data() {
         return {
             url: '/issues?query=%23Unresolved%20%23я&fields=id,summary,idReadable,project(shortName),customFields(name,value(name))&customFields=State&customFields=priority',
-            preparedTasks: []
         }
     },
     computed: {
@@ -36,9 +69,6 @@ export default {
         getTask() {
             this.$store.dispatch(actionTypes.getTasks, {url: this.url})
         },
-        preparedTask(val) {
-            this.preparedTasks.push(val)
-        }
     }
 }
 </script>

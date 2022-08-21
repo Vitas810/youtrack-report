@@ -37,8 +37,51 @@ const actions = {
             getTasksApi
                 .getTasks(url)
                 .then((tasks) => {
-                    context.commit(mutationTypes.getTasksSuccess, tasks)
-                    resolve(tasks)
+                    const listTasks = {
+                        onGradeTask: [],
+                        gradeTask: [],
+                        performance: [],
+                        inWork: [],
+                        test: [],
+                        verified: [],
+                        release: [],
+                        masterTest: [],
+                    }
+                    tasks && tasks.forEach(task => {
+                            task.customFields.forEach(customFields => {
+                                if (customFields.name && customFields.name === 'State') {
+                                    if (!customFields.value) return
+                                    switch (customFields.value.name) {
+                                        case 'На оценке':
+                                            listTasks.onGradeTask.push(task)
+                                            break
+                                        case 'Оценено':
+                                            listTasks.gradeTask.push(task)
+                                            break
+                                        case 'К выполнению':
+                                            listTasks.performance.push(task)
+                                            break
+                                        case 'В работе':
+                                            listTasks.inWork.push(task)
+                                            break
+                                        case 'Тестирование':
+                                            listTasks.test.push(task)
+                                            break
+                                        case 'Проверена':
+                                            listTasks.verified.push(task)
+                                            break
+                                        case 'В релиз':
+                                            listTasks.release.push(task)
+                                            break
+                                        case 'Мастер тестирование':
+                                            listTasks.masterTest.push(task)
+                                            break
+                                    }
+                                }
+                            })
+                    })
+                    context.commit(mutationTypes.getTasksSuccess, listTasks)
+                    resolve(listTasks)
                 })
                 .catch(() => {
                     context.commit(mutationTypes.getTasksFailure)

@@ -3,6 +3,7 @@
         <jf-task v-for="task in tasks"
                  :key="task.idReadable"
                  :task="task"
+                 @prepared_task="preparedTask"
         />
     </ul>
 </template>
@@ -18,6 +19,7 @@ export default {
     data() {
         return {
             url: '/issues?query=%23Unresolved%20%23я&fields=id,summary,idReadable,project(shortName),customFields(name,value(name))&customFields=State&customFields=priority',
+            preparedTasks: []
         }
     },
     computed: {
@@ -34,6 +36,9 @@ export default {
         getTask() {
             this.$store.dispatch(actionTypes.getTasks, {url: this.url})
         },
+        preparedTask(val) {
+            this.preparedTasks.push(val)
+        }
     }
 }
 </script>

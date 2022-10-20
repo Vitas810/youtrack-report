@@ -5,7 +5,7 @@
         <span>
             <span v-if="vTask.description" v-text="vTask.description"></span>
             <template v-if="vTask.presentation">
-                ( <span v-if="statusLists.includes(vTask.type)" v-text="vTask.type"></span> |
+                ( <span v-if="statusLists.includes(vTask.type)"> {{ vTask.type }} | </span>
                 Оценка: <span v-if="vTask.presentation" v-text="vTask.presentation"></span> )
             </template>
         </span>
